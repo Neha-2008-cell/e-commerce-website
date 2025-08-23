@@ -8,13 +8,14 @@ export default function ProductList ({products}){
      <div>
        
        <div className='flex flex-wrap bg-white '>
-       { products.map(function({category,title,imgUrl,price}){
+       { products.map(function({category,title,imgUrl,price,sku}){
         return(
         <Product 
         title={title} 
         category={category} 
         imgUrl={imgUrl} 
-        price={price}
+            price={price}
+            sku={sku}
         />
       )
     } )}

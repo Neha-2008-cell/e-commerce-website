@@ -8,8 +8,8 @@ function App(){
   return(
     
     <Routes>
-      <Route  path = "/Listpage" element = {<Listpage/>} />
-      <Route path = "/Detailpage" element = {<Detailpage/>} />
+      <Route  index element = {<Listpage/>} />
+      <Route path = "/product/:sku" element = {<Detailpage/>} />
     </Routes>
   
   )
