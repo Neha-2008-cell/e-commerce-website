@@ -50,7 +50,8 @@ function Listpage() {
   }
   return (
     <div >
-        <Navbar />
+      <Navbar />
+      <div className='mt-8'>
     <div className='bg-white  flex  justify-between'>
                <input className='bg-gray-100 m-10 border border-solid border-gray rounded p-1' value={query} placeholder='Search' onInput={handlelist}/>
                <select value={sort} onChange={handlesort} className='bg-gray-100 m-10 border border-solid border-gray rounded p-1'>
@@ -63,6 +64,7 @@ function Listpage() {
       {Data.length > 0 && <ProductList products={Data} />}
       {Data.length <= 0 && <Notmatch/>}
         <Footer />
+        </div>
   </div>
   )
 
