@@ -1,6 +1,7 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import data from "./Dummydata";
+import { IoMdArrowRoundBack } from "react-icons/io";
 export default function Detailpage() {
     const { sku } = useParams()
 let product;
@@ -16,7 +17,9 @@ for (let i = 0; i < data.length;i++){
 
     return (
         <div>
-        <div className="p-6 bg-white w-280 h-120 m-5 flex ">
+            
+            <div className="p-6 bg-white w-280 h-120 m-5 flex ">
+               <Link to="/"> <IoMdArrowRoundBack className="text-3xl "/> </Link> 
             <img className="w-100 h-100 p-5 m-4 bg-gray-200" src={product.imgUrl}></img>
             <div className="m-6 ">
                 <h1 className="pt-2.5 text-left text-gray-600 text-5xl ">{product.title}</h1>
