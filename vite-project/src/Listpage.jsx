@@ -1,21 +1,28 @@
-import React,{ useState } from 'react'
+import React,{ useEffect, useState } from 'react'
 import Navbar from './Navbar.jsx';
 import Footer from './Footer.jsx';
 import ProductList from './ProductList.jsx';
-import data from "./Dummydata";
 import Notmatch from './Notmatch.jsx';
+import { getProductList } from './api.js';
 function Listpage() {
- 
+  let [list, setlist] = useState([])
   let [query, update] = useState("")
-  let [Data, setdata] = useState(data)
+  let [Data, setdata] = useState(list)
   let [sort, setsort] = useState("default")
+
+  useEffect(
+    function () {
+     const xyz = getProductList()
+      xyz.then((response) => { setlist(response.data.products);setdata(response.data.products) })
+    }
+  , [])
  
   function handlelist(event) {
 
     let newquery = event.target.value
     update(newquery);
 
-    let newdata = data.filter(function ({ title }) {
+    let newdata = list.filter(function ({ title }) {
       return (
         title.toLowerCase().indexOf(newquery.toLowerCase()) != -1
         //title. isliye likha ki kisse indexof check karne h or indexof ke bracket me vo likha jo check karna h ki indexof me h kya.
@@ -44,7 +51,7 @@ function Listpage() {
       })
     }
     else {
-      sortData = [...data]
+      sortData = [...list]
     }
     setdata(sortData)
   }
