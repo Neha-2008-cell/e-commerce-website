@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './App.css'
 import Listpage from './Listpage'
-import {Routes , Route, BrowserRouter} from "react-router-dom"
+import {Routes , Route} from "react-router-dom"
 import Detailpage from './Detailpage'
 function App(){
   const path = window.location.pathname
@@ -9,7 +9,7 @@ function App(){
     
     <Routes>
       <Route  index element = {<Listpage/>} />
-      <Route path = "/product/:sku" element = {<Detailpage/>} />
+      <Route path = "/product/:id" element = {<Detailpage/>} />
     </Routes>
   
   )
