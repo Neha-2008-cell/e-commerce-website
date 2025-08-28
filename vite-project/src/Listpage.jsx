@@ -4,8 +4,10 @@ import Footer from './Footer.jsx';
 import ProductList from './ProductList.jsx';
 import Notmatch from './Notmatch.jsx';
 import { getProductList } from './api.js';
+import Loading from './Loading.jsx';
 function Listpage() {
   let [list, setlist] = useState([])
+  let [loading , setloading] = useState(true)
   let [query, update] = useState("")
   let [Data, setdata] = useState(list)
   let [sort, setsort] = useState("default")
@@ -13,7 +15,7 @@ function Listpage() {
   useEffect(
     function () {
      const xyz = getProductList()
-      xyz.then((response) => { setlist(response.data.products);setdata(response.data.products) })
+      xyz.then((response) => { setlist(response.data.products); setdata(response.data.products); setloading (false)})
     }
   , [])
  
@@ -55,6 +57,13 @@ function Listpage() {
     }
     setdata(sortData)
   }
+
+  if (loading) {
+    return (
+     <Loading/>
+   )
+ }
+
   return (
     <div >
       <Navbar />

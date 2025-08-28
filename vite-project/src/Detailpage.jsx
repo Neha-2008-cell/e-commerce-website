@@ -2,23 +2,23 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { getdetail } from "./api";
+import { FaChevronRight , FaChevronLeft} from "react-icons/fa6";
+import Loading from "./Loading";
 export default function Detailpage() {
     let [product , setproduct] = useState()
-    const { id } = useParams()
-  console.log("ye h id",id)
+    const id  = +useParams().id 
     useEffect(
         function () {
             const abc = getdetail(id)
-             console.log("ye h id",id)
             abc.then( function (response) {
                     setproduct(response.data)
                 } )
-        },[]
+        },[id]
     )
 
     if (!product) {
         return (
-            <h1>Loading...</h1>
+            <Loading/>
         )
     }
 // let product;
@@ -49,6 +49,9 @@ export default function Detailpage() {
             </div>
             
             </div>
+           
+            <Link to={"/product/" + (id - 1)}> <FaChevronLeft className="text-3xl " />Previous </Link> 
+            <Link to={"/product/" + (id + 1)}> <FaChevronRight  className="text-3xl "/>Next </Link> 
             </div>
     )
 }
