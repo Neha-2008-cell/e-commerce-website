@@ -34,9 +34,10 @@ export default function Detailpage() {
 
     return (
         <div>
-            
+             
             <div className="p-6 bg-white w-280 h-140 m-5 flex ">
-               <Link to="/"> <IoMdArrowRoundBack className="text-3xl "/> </Link> 
+                <Link to="/"> <IoMdArrowRoundBack className="text-4xl " /> </Link> 
+                {id > 1 && <Link to={"/product/" + (id - 1)}> <FaChevronLeft className="text-3xl mt-50 mr-5" /> </Link>}
             <img className="w-100 h-100 p-5 m-4 bg-gray-200" src={product.thumbnail}></img>
             <div className="m-6 ">
                 <h1 className="pt-2.5 text-left text-gray-600 text-5xl ">{product.title}</h1>
@@ -47,11 +48,11 @@ export default function Detailpage() {
                 <button className="text-left p-3 px-8 mb-10 m-5 rounded text-xl font-bold text-white bg-red-600">Add to Cart</button>
                 </div>
             </div>
-            
+             <Link to={"/product/" + (id + 1)}> <FaChevronRight  className="text-3xl mt-50"/> </Link> 
             </div>
            
-            <Link to={"/product/" + (id - 1)}> <FaChevronLeft className="text-3xl " />Previous </Link> 
-            <Link to={"/product/" + (id + 1)}> <FaChevronRight  className="text-3xl "/>Next </Link> 
+            
+           
             </div>
     )
 }

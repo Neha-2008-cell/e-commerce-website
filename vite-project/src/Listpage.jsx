@@ -65,7 +65,7 @@ function Listpage() {
  }
 
   return (
-    <div >
+    <div  className='overflow-scroll h-screen bg-gray-50'>
       <Navbar />
       <div className='mt-8'>
     <div className='bg-white  flex  justify-between'>
@@ -77,8 +77,10 @@ function Listpage() {
                    <option value="high">Sort by price: high to low</option>
                </select>
            </div>
-      {Data.length > 0 && <ProductList products={Data} />}
-      {Data.length <= 0 && <Notmatch/>}
+        
+          {Data.length > 0 && <ProductList products={Data} />}
+          {Data.length <= 0 && <Notmatch />}
+          
         <Footer />
         </div>
   </div>
