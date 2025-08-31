@@ -1,36 +1,37 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { getdetail } from "./api";
 import { FaChevronRight , FaChevronLeft} from "react-icons/fa6";
 import Loading from "./Loading";
+import Notmatch from "./Notmatch";
 export default function Detailpage() {
-    let [product , setproduct] = useState()
+    let [product, setproduct] = useState()
+    let [loading , setloading] = useState(true)
     const id  = +useParams().id 
     useEffect(
         function () {
             const abc = getdetail(id)
-            abc.then( function (response) {
-                    setproduct(response.data)
-                } )
+            abc.then( function (data) {
+                setproduct(data)
+                setloading(false)
+            }).catch(function () {
+                    setloading(false)
+                })
         },[id]
     )
-
-    if (!product) {
+    if (loading) {
         return (
             <Loading/>
         )
     }
-// let product;
-// for (let i = 0; i < data.length;i++){
-//     const p = data[i]
-//     if (Number(sku)===p.id) {
-//         product = p;
-//         break;
-//     }
+ if (!product) {
+        return (
+            <Notmatch/>
+        )
+    }
+
    
-// }
- 
 
     return (
         <div>

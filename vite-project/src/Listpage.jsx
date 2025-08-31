@@ -1,6 +1,5 @@
 import React,{ useEffect, useState } from 'react'
-import Navbar from './Navbar.jsx';
-import Footer from './Footer.jsx';
+
 import ProductList from './ProductList.jsx';
 import Notmatch from './Notmatch.jsx';
 import { getProductList } from './api.js';
@@ -15,7 +14,7 @@ function Listpage() {
   useEffect(
     function () {
      const xyz = getProductList()
-      xyz.then((response) => { setlist(response.data.products); setdata(response.data.products); setloading (false)})
+      xyz.then((products) => { setlist(products); setdata(products); setloading (false)})
     }
   , [])
  
@@ -65,8 +64,7 @@ function Listpage() {
  }
 
   return (
-    <div  className='overflow-scroll h-screen bg-gray-50'>
-      <Navbar />
+   
       <div className='mt-8'>
     <div className='bg-white  flex  justify-between'>
                <input className='bg-gray-100 m-10 border border-solid border-gray rounded p-1' value={query} placeholder='Search' onInput={handlelist}/>
@@ -81,8 +79,7 @@ function Listpage() {
           {Data.length > 0 && <ProductList products={Data} />}
           {Data.length <= 0 && <Notmatch />}
           
-        <Footer />
-        </div>
+       
   </div>
   )
 
