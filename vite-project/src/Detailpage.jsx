@@ -5,9 +5,10 @@ import { getdetail } from "./api";
 import { FaChevronRight , FaChevronLeft} from "react-icons/fa6";
 import Loading from "./Loading";
 import Notmatch from "./Notmatch";
-export default function Detailpage() {
+export default function Detailpage({handleCart}) {
     let [product, setproduct] = useState()
-    let [loading , setloading] = useState(true)
+    let [loading, setloading] = useState(true)
+    let [count,setcount] = useState(1)
     const id  = +useParams().id 
     useEffect(
         function () {
@@ -20,7 +21,7 @@ export default function Detailpage() {
                 })
         },[id]
     )
-    if (loading) {
+    if (loading) {3
         return (
             <Loading/>
         )
@@ -31,8 +32,14 @@ export default function Detailpage() {
         )
     }
 
-   
+    function handlecount(event) {
+       setcount(+event.target.value)
+   }
 
+    function pressbutton() {
+        handleCart(id,count)
+    }
+    
     return (
         <div>
              
@@ -45,8 +52,8 @@ export default function Detailpage() {
                  <h3 className='font-bold text-left pt-6 text-3xl text-gray-600 '>${product.price }</h3>
                  <p className=' text-left pr-10 text-xl leading-9 pt-6'>{product.description} </p>
                 <div className="text-left mt-4">
-                <input className="border border-gray-300 border-2 w-12 p-3 h-8 pl-2" defaultValue={1} type="text"></input>
-                <button className="text-left p-3 px-8 mb-10 m-5 rounded text-xl font-bold text-white bg-red-600">Add to Cart</button>
+                <input className="border border-gray-300 border-2 w-15 p-3 h-8 pl-2" onChange={handlecount} defaultValue={count} type="number"></input>
+                <button className="text-left p-3 px-8 mb-10 m-5 rounded text-xl font-bold text-white bg-red-600" onClick={pressbutton}>Add to Cart</button>
                 </div>
             </div>
              <Link to={"/product/" + (id + 1)}> <FaChevronRight  className="text-3xl mt-50"/> </Link> 
