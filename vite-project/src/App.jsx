@@ -6,14 +6,24 @@ import Detailpage from './Detailpage'
 import Navbar from './Navbar.jsx';
 import Footer from './Footer.jsx';
 function App() {
-  let [totalcount,updatecount]=useState(0)
-  function handleCart(id,count) {
-    console.log("id is :", id, "count is", count)
-    updatecount(totalcount + count)
+  let getdata = localStorage.getItem("cart") || "{}"
+  let cartobject = JSON.parse(getdata)
+  let[cart,setcart] = useState(cartobject)          
+  
+  function handleCart(id, count) {
+    const oldCount = cart[id] || 0
+    const newCart = { ...cart, [id]: oldCount + count }
+    setcart(newCart);
+    let cartstring = JSON.stringify(newCart)
+    localStorage.setItem("cart",cartstring)
   }
+    const totalcount = Object.keys(cart).reduce(function (output,current) {
+      return output + cart[current]
+    }, 0)
   const path = window.location.pathname
+
   return(
-     <div  className='overflow-scroll h-screen flex flex-col  bg-gray-50'>
+     <div  className='overflow-scroll h-screen  flex flex-col  bg-gray-50'>
       <Navbar totalcount={ totalcount} />
    <div className='grow'>
       <Routes>
