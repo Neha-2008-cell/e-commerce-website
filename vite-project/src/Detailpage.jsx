@@ -37,7 +37,8 @@ export default function Detailpage({handleCart}) {
    }
 
     function pressbutton() {
-        handleCart(id,count)
+        setcount(1)
+        handleCart(id, count)
     }
     
     return (
@@ -52,8 +53,8 @@ export default function Detailpage({handleCart}) {
                  <h3 className='font-bold text-left pt-6 text-3xl text-gray-600 '>${product.price }</h3>
                  <p className=' text-left pr-10 text-xl leading-9 pt-6'>{product.description} </p>
                 <div className="text-left mt-4">
-                <input className="border border-gray-300 border-2 w-15 p-3 h-8 pl-2" onChange={handlecount} defaultValue={count} type="number"></input>
-                <button className="text-left p-3 px-8 mb-10 m-5 rounded text-xl font-bold text-white bg-red-600" onClick={pressbutton}>Add to Cart</button>
+                <input className="border border-gray-300 border-2 w-18 p-3 h-8 pl-2" onChange={handlecount} value={count} type="number"></input>
+                <button className="text-left p-3 px-8 mb-10 m-5 rounded text-xl font-bold text-white bg-red-600 active:bg-red-400" onClick={pressbutton}>Add to Cart</button>
                 </div>
             </div>
              <Link to={"/product/" + (id + 1)}> <FaChevronRight  className="text-3xl mt-50"/> </Link> 

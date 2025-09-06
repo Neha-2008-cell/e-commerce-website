@@ -1,10 +1,12 @@
-import { useState } from 'react'
+import { useState} from 'react'
 import './App.css'
 import Listpage from './Listpage'
-import {Routes , Route} from "react-router-dom"
+import {Routes , Route, useLocation} from "react-router-dom"
 import Detailpage from './Detailpage'
 import Navbar from './Navbar.jsx';
 import Footer from './Footer.jsx';
+import Login from './Login.jsx'
+import Cartpage from './Cartpage.jsx'
 function App() {
   let getdata = localStorage.getItem("cart") || "{}"
   let cartobject = JSON.parse(getdata)
@@ -20,18 +22,21 @@ function App() {
     const totalcount = Object.keys(cart).reduce(function (output,current) {
       return output + cart[current]
     }, 0)
-  const path = window.location.pathname
+  const location = useLocation()
+  const path = location.pathname
 
   return(
      <div  className='overflow-scroll h-screen  flex flex-col  bg-gray-50'>
-      <Navbar totalcount={ totalcount} />
+      {path !== '/Login' && <Navbar totalcount={totalcount} />}
    <div className='grow'>
       <Routes>
       <Route  index element = {<Listpage/>} />
-          <Route path="/product/:id" element={<Detailpage handleCart={ handleCart} />} />
+      <Route path="/product/:id" element={<Detailpage handleCart={ handleCart} />} />
+      <Route  path='/Login' element = {<Login/>} />
+      <Route  path='/Cartpage' element = {<Cartpage/>} />
     </Routes>
     </div>
-   <Footer />
+      {path !=='/Login'  && <Footer />}
         </div>
   )
 }
