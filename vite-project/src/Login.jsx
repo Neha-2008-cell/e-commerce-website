@@ -13,12 +13,12 @@ function Login() {
 
   const schema = Yup.object().shape(
     {
-      name: Yup.string().required().email(),
+      name: Yup.string().required(),
       password:Yup.string().required().min(8)
     }
   )
   
-  const { handleSubmit , handleChange , values ,errors} = useFormik(
+  const { handleSubmit , handleChange , values ,errors , isValid , touched , handleBlur ,dirty} = useFormik(
     {
       initialValues: {
         name: "" ,
@@ -46,11 +46,12 @@ function Login() {
               className="text-white p-5 pl-12 m-2 h-15 rounded text-xl border border-gray-300 placeholder-gray-300"
               name="name" 
               id="name"
+              onBlur={handleBlur}
               value={values.name}
               onChange={handleChange}
-              type="email"
+              type="text"
               placeholder="USERNAME" />
-            {errors.name && <div>{errors.name}</div>}
+            {touched.name && errors.name && <div className="text-red-800">{errors.name}</div>}
             </div>
            
             <br/>
@@ -62,16 +63,17 @@ function Login() {
             <input
               className="text-white placeholder-gray-300 pl-12  p-5 h-15 text-xl rounded border border-gray-300 placeholder-gray-300"
               name="password" 
+              id="pswd"
+              onBlur={handleBlur}
               value={values.password}
               onChange={handleChange}
-              id="pswd"
               type="password"
               placeholder="PASSWORD" />
-              {errors.password && <div>{errors.password}</div>}
+              {touched.password && errors.password && <div className="text-red-800">{errors.password}</div>}
             </div>
-          <button type="submit" className="text-xl text-blue-800 py-2 px-38 bg-white m-12 mb-2 rounded">LOGIN</button>
+          <button type="submit" className="text-xl text-blue-800 py-2 px-38 bg-white m-12 mb-2 rounded disabled:bg-gray-300 disabled:text-blue-300" disabled={!isValid || !dirty}> LOGIN </button>
           <br/>
-          <Link className="text-white italic text-xl ml-50 my-2" to="/" >Forgot password ?</Link>
+          <Link className="text-white italic text-xl ml-50 my-2" to="/forgotPassword" >Forgot password ?</Link>
         </form>
         
   </div>  
