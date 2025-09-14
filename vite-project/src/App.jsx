@@ -31,7 +31,7 @@ function App() {
   
   
 
-  return (
+  return (  
     <totalCountContext.Provider value={{totalcount}}>
      <div  className='overflow-scroll h-screen  flex flex-col  bg-gray-50'>
       {path !== '/Login'&&  path !== '/signup' &&  path !== '/forgotPassword' && <Navbar  />}
