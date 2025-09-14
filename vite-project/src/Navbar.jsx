@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { RiShoppingBagLine } from "react-icons/ri";
-export default function Navbar({totalcount}) {
+import {totalCountContext} from "./App.jsx"
+export default function Navbar() {
+  
+  const { totalcount } = useContext(totalCountContext)
+
     return (
       <div className='bg-white w-full flex justify-between items-center'>
           

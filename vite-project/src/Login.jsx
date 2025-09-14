@@ -35,7 +35,7 @@ function Login() {
   <div className="h-screen w-screen flex  bg-blue-800">
         <form
           onSubmit={handleSubmit}
-          className="m-50 ml-80">
+          className="m-50 mt-40 ml-80">
             <Link to="/"><LuShoppingCart className="w-40 ml-40 mb-20 h-40 text-white"/></Link>
             <div className="relative ">
                <span className="text-gray-300 absolute top-7 text-xl left-15"><RiUser3Line /></span>
@@ -74,8 +74,13 @@ function Login() {
           <button type="submit" className="text-xl text-blue-800 py-2 px-38 bg-white m-12 mb-2 rounded disabled:bg-gray-300 disabled:text-blue-300" disabled={!isValid || !dirty}> LOGIN </button>
           <br/>
           <Link className="text-white italic text-xl ml-50 my-2" to="/forgotPassword" >Forgot password ?</Link>
+
+          <div className="flex m-10 text-xl pl-8 text-white">
+           <p className="pr-3">Don't have an account ? </p>  <Link to='/signup'  className="underline "> Sign Up</Link>
+          </div>
+          
         </form>
-        
+       
   </div>  
        
     )
