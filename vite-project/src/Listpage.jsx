@@ -1,5 +1,5 @@
 import React,{ useEffect, useState } from 'react'
-
+import Input from './Input.jsx'
 import ProductList from './ProductList.jsx';
 import Notmatch from './Notmatch.jsx';
 import { getProductList } from './api.js';
@@ -67,8 +67,9 @@ function Listpage() {
    
       <div className='mt-8'>
     <div className='bg-white  flex  justify-between'>
-               <input className='bg-gray-100 m-10 border border-solid border-gray rounded p-1' value={query} placeholder='Search' onInput={handlelist}/>
-               <select value={sort} onChange={handlesort} className='bg-gray-100 m-10 border border-solid border-gray rounded p-1'>
+             {/* <input className='bg-gray-100 m-10 border border-solid border-gray rounded p-1' value={query} placeholder='Search' onInput={handlelist}/> */}
+        <Input   value={query} placeholder='Search' onInput={handlelist}/>   
+        <select value={sort} onChange={handlesort} className='bg-gray-100 m-10 border border-solid border-gray rounded p-1'>
                    <option value="default">Default Sort</option>
                    <option value="title">Sort by title</option>
                    <option value="low">Sort by price: low to high</option>

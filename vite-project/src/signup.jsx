@@ -7,7 +7,7 @@ import { LuShoppingCart } from "react-icons/lu";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { FaRegUserCircle } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
-import Input from "./Input"
+import FormikInput from "./FormikInput"
 
  function Signup () {
      function apiDataSend(values) {
@@ -46,9 +46,9 @@ import Input from "./Input"
                 <Link to="/"><LuShoppingCart className="w-40 ml-40 mb-10 h-40 text-white"/></Link>
                 
                 <div className="relative ">
-                   <span className="text-gray-300 absolute top-6 text-xl left-18"><FaRegUserCircle /></span>
+                   <span className="text-gray-300 absolute top-6 text-xl left-16"><FaRegUserCircle /></span>
                 
-                  <Input
+                  <FormikInput
                   label=" Full name"
                   name="fullname" 
                   type="text"
@@ -57,9 +57,9 @@ import Input from "./Input"
                   </div>       
                 
                   <div className="relative ">
-                   <span className="text-gray-300 absolute top-6 text-xl left-18"><MdEmail /></span>
+                   <span className="text-gray-300 absolute  top-6 text-xl left-16"><MdEmail /></span>
                 
-                  <Input
+                  <FormikInput
                   label="Email"
                   name="email" 
                   type="email"
@@ -69,9 +69,9 @@ import Input from "./Input"
                 </div>          
 
                  <div className="relative ">
-                   <span className="text-gray-300 absolute top-6 text-xl left-18"><RiUser3Line /></span>
+                   <span className="text-gray-300 absolute top-6 text-xl left-16"><RiUser3Line /></span>
                 
-                   <Input
+                   <FormikInput
                   label=" Username"
                   name="name" 
                   type="text"
@@ -83,9 +83,9 @@ import Input from "./Input"
                
                 
                  <div className="relative ">
-                 <span className="text-gray-300 absolute top-6 text-xl left-18"><RiLockPasswordFill /></span>
+                 <span className="text-gray-300 absolute top-6 text-xl left-16"><RiLockPasswordFill /></span>
                 
-                 <Input
+                 <FormikInput
                   label=" Password"
                   name="password" 
                   type="password"
@@ -95,9 +95,9 @@ import Input from "./Input"
                 </div>
                 
                  <div className="relative ">
-                 <span className="text-gray-300 absolute top-6 text-xl left-18"><RiLockPasswordFill /></span>
+                 <span className="text-gray-300 absolute top-6 text-xl left-16"><RiLockPasswordFill /></span>
                 
-                  <Input
+                  <FormikInput
                   label=" Confirm Password"
                   name="Confirmpassword" 
                   type="password"

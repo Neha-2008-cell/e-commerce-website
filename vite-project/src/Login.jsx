@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { RiUser3Line } from "react-icons/ri";
 import { LuShoppingCart } from "react-icons/lu";
 import { RiLockPasswordFill } from "react-icons/ri";
-import Input from "./Input";
+import FormikInput from "./FormikInput";
 function Login() {
 
   function apiDataSend(values) {
@@ -50,9 +50,9 @@ function Login() {
           className="m-50 mt-40 ml-80">
             <Link to="/"><LuShoppingCart className="w-40 ml-40 mb-20 h-40 text-white"/></Link>
             <div className="relative ">
-            <span className="text-gray-300 absolute top-6 text-xl left-18"><RiUser3Line /></span>
+            <span className="text-gray-300 absolute top-6 text-xl left-16"><RiUser3Line /></span>
             
-            <Input
+            <FormikInput
                label=" Username"
                name="name" 
                type="text"
@@ -64,9 +64,9 @@ function Login() {
            
             <br/>
              <div className="relative ">
-             <span className="text-gray-300 absolute top-6 text-xl left-18"><RiLockPasswordFill /></span>
+             <span className="text-gray-300 absolute top-6 text-xl left-16"><RiLockPasswordFill /></span>
            
-            <Input
+            <FormikInput
                label=" Username"
                name="password" 
                type="password"
