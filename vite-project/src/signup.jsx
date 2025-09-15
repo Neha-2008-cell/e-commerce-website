@@ -7,7 +7,7 @@ import { LuShoppingCart } from "react-icons/lu";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { FaRegUserCircle } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
-import FormikInput from "./FormikInput"
+import { FormikInput } from "./Input";
 
  function Signup () {
      function apiDataSend(values) {

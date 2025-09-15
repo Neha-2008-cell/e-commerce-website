@@ -1,4 +1,4 @@
-import { useField } from "formik";
+import FormikHOC from "./FormikHOC"
 
 
 export default function Input({ label, id, type, placeholder, value, className , ...rest}) {
@@ -23,3 +23,5 @@ export default function Input({ label, id, type, placeholder, value, className ,
         </div>
     )
 }
+
+export const FormikInput = FormikHOC(Input)

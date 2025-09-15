@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { RiUser3Line } from "react-icons/ri";
 import { LuShoppingCart } from "react-icons/lu";
 import { RiLockPasswordFill } from "react-icons/ri";
-import FormikInput from "./FormikInput";
+import { FormikInput } from "./Input";
 function Login() {
 
   function apiDataSend(values) {
