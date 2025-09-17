@@ -1,7 +1,7 @@
 import FormikHOC from "./FormikHOC"
 
 
-export default function Input({ label, id, type, placeholder, value, className , ...rest}) {
+export default function Input({ label, id, type, placeholder, value, className,touched,error , ...rest}) {
     
   
 
@@ -12,13 +12,14 @@ export default function Input({ label, id, type, placeholder, value, className ,
               {label}
             </label>
             <input
-        className={className + "bg-gray-100 m-10 border border-solid border-gray rounded p-1 "  }
+        className={className   }
               id={id}
-              value={value}
+              value={value || ""}
               type={type}
               placeholder={placeholder}
              {...rest}
       />
+          {touched && error && <div className="text-red-800">{error}</div>}
           
         </div>
     )

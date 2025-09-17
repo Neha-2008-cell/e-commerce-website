@@ -1,5 +1,5 @@
 import { memo } from "react";
-import { Formik , Form} from "formik"; 
+import { withFormik} from "formik"; 
 import * as Yup from 'yup'
 import { Link } from 'react-router-dom';
 import { RiUser3Line } from "react-icons/ri";
@@ -7,10 +7,10 @@ import { LuShoppingCart } from "react-icons/lu";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { FaRegUserCircle } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
-import { FormikInput } from "./Input";
+import Input  from "./Input";
 
- function Signup () {
-     function apiDataSend(values) {
+
+ function apiDataSend(values) {
             console.log("Sending data",values.name,values.password)
          }
     
@@ -33,37 +33,53 @@ import { FormikInput } from "./Input";
             Confirmpassword:"",
     }
     
+
+
+ function Signup ({handleSubmit,handleChange,handleBlur,values,errors, touched}) {
+    
         return (
-      <div className="h-screen w-screen flex  bg-blue-800">
-            <Formik
+      <div className="h-screen w-screen flex  bg-blue-800" onSubmit={handleSubmit}>
+            {/* <Formik
                initialValues={initialValues }
                onSubmit= { apiDataSend }
                validationSchema= { schema }
                validateOnMount={ true}
-            >
-            <Form
+            > */}
+            <form
               className="m-50 mt-10 ml-80">
                 <Link to="/"><LuShoppingCart className="w-40 ml-40 mb-10 h-40 text-white"/></Link>
                 
                 <div className="relative ">
                    <span className="text-gray-300 absolute top-6 text-xl left-16"><FaRegUserCircle /></span>
                 
-                  <FormikInput
+                  <Input
                   label=" Full name"
                   name="fullname" 
                   type="text"
                   placeholder="FULL NAME" 
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.fullname}
+                  error={errors.fullname}
+                  touched={touched.fullname}
+                  className="text-white p-5 pl-12 m-1 h-15 rounded text-xl border border-gray-300 placeholder-gray-300"
                    />
                   </div>       
                 
                   <div className="relative ">
                    <span className="text-gray-300 absolute  top-6 text-xl left-16"><MdEmail /></span>
                 
-                  <FormikInput
+                  <Input
                   label="Email"
                   name="email" 
                   type="email"
                   placeholder="EMAIL ADDRESS" 
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.email}
+                  error={errors.email}
+                  touched={touched.email}
+                  className="text-white p-5 pl-12 m-1 h-15 rounded text-xl border border-gray-300 placeholder-gray-300"
                    />
 
                 </div>          
@@ -71,12 +87,17 @@ import { FormikInput } from "./Input";
                  <div className="relative ">
                    <span className="text-gray-300 absolute top-6 text-xl left-16"><RiUser3Line /></span>
                 
-                   <FormikInput
+                   <Input
                   label=" Username"
                   name="name" 
                   type="text"
                   placeholder="USERNAME" 
-                  
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.name}
+                  error={errors.name}
+                  touched={touched.name}
+                  className="text-white p-5 pl-12 m-1 h-15 rounded text-xl border border-gray-300 placeholder-gray-300"
                   />
                   
                 </div>   
@@ -85,11 +106,17 @@ import { FormikInput } from "./Input";
                  <div className="relative ">
                  <span className="text-gray-300 absolute top-6 text-xl left-16"><RiLockPasswordFill /></span>
                 
-                 <FormikInput
+                 <Input
                   label=" Password"
                   name="password" 
                   type="password"
-                  placeholder="PASSWORD" 
+                  placeholder="PASSWORD"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.password}
+                  error={errors.password}
+                  touched={touched.password}
+                  className="text-white p-5 pl-12 m-1 h-15 rounded text-xl border border-gray-300 placeholder-gray-300"
                    /> 
                   
                 </div>
@@ -97,11 +124,17 @@ import { FormikInput } from "./Input";
                  <div className="relative ">
                  <span className="text-gray-300 absolute top-6 text-xl left-16"><RiLockPasswordFill /></span>
                 
-                  <FormikInput
+                  <Input
                   label=" Confirm Password"
                   name="Confirmpassword" 
                   type="password"
                   placeholder="CONFIRM PASSWORD" 
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.Confirmpassword}
+                  error={errors.Confirmpassword}
+                  touched={touched.Confirmpassword}
+                  className="text-white p-5 pl-12 m-1 h-15 rounded text-xl border border-gray-300 placeholder-gray-300"
                    />
                   
                 
@@ -114,11 +147,17 @@ import { FormikInput } from "./Input";
                <p className="pr-3">Already have an account ? </p>  <Link to='/Login'  className="underline "> Login</Link>
               </div>
               
-            </Form>
-          </Formik> 
+            </form>
+          {/* </Formik>  */}
       </div>  
            
         )
-     }
-    export default memo(Signup)
+ }
+     
+    const HOC = withFormik({ handleSubmit: apiDataSend, validationSchema: schema, initialValues: initialValues, validateOnMount:true})
+    const EasySign = HOC(Signup )
+    
+    export default memo(EasySign);
+
+    
     
