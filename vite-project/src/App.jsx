@@ -11,17 +11,22 @@ import ForgotPassword from './ForgotPassword.jsx'
 import Cartpage from './Cartpage.jsx'
 export const totalCountContext = React.createContext()
 function App() {
-  let getdata = localStorage.getItem("cart") || "{}"
+  let getdata = localStorage.getItem("cartstorage") || "{}"
   let cartobject = JSON.parse(getdata)
   let[cart,setcart] = useState(cartobject)          
   
   function handleCart(id, count) {
     const oldCount = cart[id] || 0
     const newCart = { ...cart, [id]: oldCount + count }
+    updateCart(newCart)
+  }
+
+  function updateCart(newCart) {
     setcart(newCart);
     let cartstring = JSON.stringify(newCart)
-    localStorage.setItem("cart",cartstring)
-  }
+    localStorage.setItem("cartstorage",cartstring)
+ }
+
     const totalcount = Object.keys(cart).reduce(function (output,current) {
       return output + cart[current]
     }, 0)
@@ -42,7 +47,7 @@ function App() {
       <Route  path='/Login' element = {<Login/>} />
       <Route  path='/signup' element = {<Signup/>} />
       <Route path='/forgotPassword' element={<ForgotPassword/> } />
-      <Route  path='/Cartpage' element = {<Cartpage/>} />
+            <Route path='/Cartpage' element={<Cartpage cart={cart} updateCart={updateCart} />} />
     </Routes>
     </div>
       {path !=='/Login' && path !== '/signup' && path !== '/forgotPassword' && <Footer />}
