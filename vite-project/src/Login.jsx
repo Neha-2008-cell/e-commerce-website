@@ -38,7 +38,7 @@ export function Login({handleSubmit,handleChange,handleBlur,values,errors, touch
           className="m-50 mt-40 ml-80" onSubmit={handleSubmit}>
             <Link to="/"><LuShoppingCart className="w-40 ml-40 mb-20 h-40 text-white"/></Link>
             <div className="relative ">
-            <span className="text-gray-300 absolute top-6 text-xl left-16"><RiUser3Line /></span>
+            <span className="text-gray-300 absolute top-6 text-xl left-18"><RiUser3Line /></span>
             
             <Input
                label=" Username"
@@ -59,7 +59,7 @@ export function Login({handleSubmit,handleChange,handleBlur,values,errors, touch
            
             <br/>
              <div className="relative ">
-             <span className="text-gray-300 absolute top-6 text-xl left-16"><RiLockPasswordFill /></span>
+             <span className="text-gray-300 absolute top-6 text-xl left-18"><RiLockPasswordFill /></span>
            
             <Input
                label="PASSWORD"
