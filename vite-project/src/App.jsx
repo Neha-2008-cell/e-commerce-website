@@ -13,9 +13,12 @@ export const totalCountContext = createContext()
 export const countdata = createContext()
 
 function App() {
-  let getdata = localStorage.getItem("cartstorage") || "{}"
-  let cartobject = JSON.parse(getdata)
-  let[cart,setcart] = useState(cartobject)          
+  const getdata = localStorage.getItem("cartstorage") || "{}"
+  const cartobject = JSON.parse(getdata)
+  const [cart, setcart] = useState(cartobject) 
+   const [ user, setUser ] = useState();
+  
+  
   
   function handleCart(id, count) {
     const oldCount = cart[id] || 0
@@ -29,7 +32,7 @@ function App() {
     localStorage.setItem("cartstorage",cartstring)
  }
 
-    const totalcount = Object.keys(cart).reduce(function (output,current) {
+  const totalcount = Object.keys(cart).reduce(function (output,current) {
       return output + cart[current]
     }, 0)
   const location = useLocation()
@@ -47,7 +50,7 @@ function App() {
       <Routes>
       <Route  index element = {<Listpage/>} />
       <Route path="/product/:id" element={<Detailpage handleCart={ handleCart} />} />
-      <Route  path='/Login' element = {<Login/>} />
+              <Route path='/Login' element={<Login setUser={setUser } />} />
       <Route  path='/signup' element = {<Signup/>} />
       <Route path='/forgotPassword' element={<ForgotPassword/> } />
             <Route path='/Cartpage' element={<Cartpage  />} />

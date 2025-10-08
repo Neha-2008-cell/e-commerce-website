@@ -1,4 +1,5 @@
 import { memo } from "react";
+import axios from "axios";
 import { withFormik} from "formik"; 
 import * as Yup from 'yup'
 import { Link } from 'react-router-dom';
@@ -7,9 +8,16 @@ import { LuShoppingCart } from "react-icons/lu";
 import { RiLockPasswordFill } from "react-icons/ri";
 import  Input  from "./Input";
 
-
- function apiDataSend(values) {
-        console.log("Sending data",values.name,values.password)
+//formik ke handleSubmit pe function apiDataSend de rkha hai formik me ek object hai bag 
+// jisme bhut sare info hai uske ek key hai props jisme HOC ko jo function uske sare prop hote hai or usse vah khud hi nikal leta hai. 
+ function apiDataSend(values , bag ) {
+     axios.post("https://myeasyKart.codeyogi.io/login", { email: values.name, password: values.password })
+     .then((response) => {
+       const { user, token } = response.data
+       localStorage.setItem("token", token)
+       bag.props.setUser(user)
+     })
+     .catch(() => (console.log("Invalid")))
      }
 
   const schema = Yup.object().shape(
@@ -28,12 +36,8 @@ const initialValues=
 export function Login({handleSubmit,handleChange,handleBlur,values,errors, touched}) {
     return (
   <div className="h-screen w-screen flex  bg-blue-800">
-        {/* <Formik
-          onSubmit={apiDataSend}
-          validationSchema= {schema}
-          initialValues={initialvalues}
-          validateOnMount
-        > */}
+        {/* <Formik  onSubmit={apiDataSend} validationSchema= {schema}  initialValues={initialvalues} validateOnMount > */}
+         
         <form
           className="m-50 mt-40 ml-80" onSubmit={handleSubmit}>
             <Link to="/"><LuShoppingCart className="w-40 ml-40 mb-20 h-40 text-white"/></Link>

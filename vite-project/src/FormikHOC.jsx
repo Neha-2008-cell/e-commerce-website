@@ -10,7 +10,7 @@ export default function FormikHOC(IncomingComponent) {
         const { error, touched } = meta
         
           
-        return (
+       return (
             <div>
                 <label htmlFor={name} className="sr-only">
                     {label}
