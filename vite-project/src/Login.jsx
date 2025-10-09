@@ -8,22 +8,25 @@ import { LuShoppingCart } from "react-icons/lu";
 import { RiLockPasswordFill } from "react-icons/ri";
 import  Input  from "./Input";
 
-//formik ke handleSubmit pe function apiDataSend de rkha hai formik me ek object hai bag 
-// jisme bhut sare info hai uske ek key hai props jisme HOC ko jo function uske sare prop hote hai or usse vah khud hi nikal leta hai. 
- function apiDataSend(values , bag ) {
-     axios.post("https://myeasyKart.codeyogi.io/login", { email: values.name, password: values.password })
+//formik ke handleSubmit pe function apiDataSend de rkha hai formik me ek object hai bag jisme bhut sare info hai uske ek key hai props jisme HOC ko jo function uske sare prop hote hai or usse vah khud hi nikal leta hai. 
+ 
+
+function apiDataSend(values, bag) {
+     axios.post("https://dummyjson.com/auth/login", 
+       { username: values.name, password: values.password }
+     )
      .then((response) => {
-       const { user, token } = response.data
+       const {  token , ...user } = response.data
        localStorage.setItem("token", token)
        bag.props.setUser(user)
      })
-     .catch(() => (console.log("Invalid")))
+     .catch((error) => (console.log("Invalid",error.response?.data || error.message)))
      }
 
   const schema = Yup.object().shape(
     {
       name: Yup.string().required(),
-      password:Yup.string().required().min(8)
+      password:Yup.string().required()
     }
   )
 

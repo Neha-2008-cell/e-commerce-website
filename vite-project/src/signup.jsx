@@ -1,4 +1,5 @@
-import { memo } from "react";
+import { memo} from "react";
+import axios from "axios";
 import { withFormik} from "formik"; 
 import * as Yup from 'yup'
 import { Link } from 'react-router-dom';
@@ -10,17 +11,33 @@ import { MdEmail } from "react-icons/md";
 import Input  from "./Input";
 
 
- function apiDataSend(values) {
-            console.log("Sending data",values.name,values.password)
+function apiDataSend(values, { props }) {
+   console.log("ko diyo ni margana")
+   axios.post("https://dummyjson.com/auth/register", {
+            email: "eve.holt@reqres.in",
+  password: "pistol"
+            // name: values.name,
+            // fullname:values.fullname,
+            // email:values.email,
+            // password:values.password ,
+            //Confirmpassword:values.Confirmpassword
+          })
+            .then((response) => {
+             console.log("response radha",response.data)
+               const { id, token } = response.data
+                localStorage.setItem("token", token)
+                props.setUser(id)
+            })
+            .catch(() => (console.log("Invalid")))
          }
     
       const schema = Yup.object().shape(
         {
           name: Yup.string().required("This field is required").min(3),
-          password:Yup.string().required("This field is required").min(8),
+          password:Yup.string().required("This field is required"),
           fullname:Yup.string().required("This field is required").min(3),
           email:Yup.string().required("This field is required").email(),
-        Confirmpassword:Yup.string().oneOf([Yup.ref("password")],"Passwords must be match.").required("This field is required").min(8),
+          Confirmpassword:Yup.string().oneOf([Yup.ref("password")],"Passwords must be match.").required("This field is required"),
         }
       )
       
@@ -36,9 +53,9 @@ import Input  from "./Input";
 
 
  function Signup ({handleSubmit,handleChange,handleBlur,values,errors, touched}) {
-    
+       
         return (
-      <div className="h-screen w-screen flex  bg-blue-800" onSubmit={handleSubmit}>
+      <div className="h-screen w-screen flex  bg-blue-800" >
             {/* <Formik
                initialValues={initialValues }
                onSubmit= { apiDataSend }
@@ -46,7 +63,8 @@ import Input  from "./Input";
                validateOnMount={ true}
             > */}
             <form
-              className="m-50 mt-10 ml-80">
+              className="m-50 mt-10 ml-80"
+              onSubmit={handleSubmit}>
                 <Link to="/"><LuShoppingCart className="w-40 ml-40 mb-10 h-40 text-white"/></Link>
                 
                 <div className="relative ">

@@ -9,14 +9,16 @@ import Login from './Login.jsx';
 import Signup from './signup.jsx'
 import ForgotPassword from './ForgotPassword.jsx'
 import Cartpage from './Cartpage.jsx'
+import Loggedin from './Loggedin.jsx'
+import NonLoggedin from './NonLoggedin.jsx'
 export const totalCountContext = createContext()
 export const countdata = createContext()
-
+export const userData = createContext()
 function App() {
   const getdata = localStorage.getItem("cartstorage") || "{}"
   const cartobject = JSON.parse(getdata)
   const [cart, setcart] = useState(cartobject) 
-   const [ user, setUser ] = useState();
+   const [ user, setUser ] = useState(null);
   
   
   
@@ -40,26 +42,32 @@ function App() {
 
   
   const cartdata = { cart,updateCart}
-
-  return (  
+  const userinfo = {user , setUser}
+  return ( 
+    <userData.Provider value ={userinfo}>
     <totalCountContext.Provider value={{ totalcount }}>
-      <countdata.Provider value={cartdata}>
+    <countdata.Provider value={cartdata}>
      <div  className='overflow-scroll h-screen  flex flex-col  bg-gray-50'>
       {path !== '/Login'&&  path !== '/signup' &&  path !== '/forgotPassword' && <Navbar  />}
-   <div className='grow'>
-      <Routes>
-      <Route  index element = {<Listpage/>} />
+      <div className='grow'>
+        <Routes>
+          
+   <Route  index element = {<Loggedin><Listpage/></Loggedin>}/>
       <Route path="/product/:id" element={<Detailpage handleCart={ handleCart} />} />
-              <Route path='/Login' element={<Login setUser={setUser } />} />
+      <Route path='/Cartpage' element={<Cartpage  />} />
+  
+    <Route  path='/Login'  element = {<NonLoggedin><Login setUser={setUser } /></NonLoggedin>}/>
+      
       <Route  path='/signup' element = {<Signup/>} />
       <Route path='/forgotPassword' element={<ForgotPassword/> } />
-            <Route path='/Cartpage' element={<Cartpage  />} />
-    </Routes>
-    </div>
+    
+      </Routes>
+        </div>
       {path !=='/Login' && path !== '/signup' && path !== '/forgotPassword' && <Footer />}
       </div>
       </countdata.Provider>
-    </totalCountContext.Provider>
+      </totalCountContext.Provider>
+      </userData.Provider>
   )
 }
 export default App;
