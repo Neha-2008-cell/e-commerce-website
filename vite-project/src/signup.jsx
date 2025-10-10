@@ -12,7 +12,6 @@ import Input  from "./Input";
 
 
 function apiDataSend(values, { props }) {
-   console.log("ko diyo ni margana")
    axios.post("https://dummyjson.com/auth/register", {
             email: "eve.holt@reqres.in",
   password: "pistol"
@@ -158,7 +157,7 @@ function apiDataSend(values, { props }) {
                 
                 </div>    
 
-              <button type="submit" className="text-xl text-blue-800 py-2 px-38 bg-white m-10  rounded disabled:bg-gray-300 disabled:text-blue-300" > Sign up </button>
+              <button type="submit" className="text-xl text-blue-800 py-2 px-38 bg-white m-10  rounded focus:text-blue-800 focus:bg-white hover:bg-gray-200 hover:text-blue-500 disabled:bg-gray-300 disabled:text-blue-300" > Sign up </button>
              
     
               <div className="flex m-14 mt-1 text-xl pl-8 text-white">

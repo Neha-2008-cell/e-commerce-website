@@ -1,4 +1,3 @@
-import { memo } from "react";
 import axios from "axios";
 import { withFormik} from "formik"; 
 import * as Yup from 'yup'
@@ -7,6 +6,7 @@ import { RiUser3Line } from "react-icons/ri";
 import { LuShoppingCart } from "react-icons/lu";
 import { RiLockPasswordFill } from "react-icons/ri";
 import  Input  from "./Input";
+import withUser from "./withUser";
 
 //formik ke handleSubmit pe function apiDataSend de rkha hai formik me ek object hai bag jisme bhut sare info hai uske ek key hai props jisme HOC ko jo function uske sare prop hote hai or usse vah khud hi nikal leta hai. 
  
@@ -84,7 +84,7 @@ export function Login({handleSubmit,handleChange,handleBlur,values,errors, touch
            
             
             </div>
-          <button type="submit" className="text-xl text-blue-800 py-2 px-38 bg-white m-12 mb-2 rounded disabled:bg-gray-300 disabled:text-blue-300" > LOGIN </button>
+          <button type="submit" className="text-xl text-blue-800 py-2 px-38 bg-white m-12 mb-2 focus:text-blue-800 focus:bg-white hover:bg-gray-200 hover:text-blue-500 rounded disabled:bg-gray-100 disabled:text-blue-300" > LOGIN </button>
           <br/>
           <Link className="text-white italic text-xl ml-50 my-2" to="/forgotPassword" >Forgot password ?</Link>
 
@@ -99,10 +99,10 @@ export function Login({handleSubmit,handleChange,handleBlur,values,errors, touch
     )
 }
  
-const HOC = withFormik({ handleSubmit: apiDataSend, validationSchema: schema, initialValues: initialValues, validateOnMount:true})
-const EasyLogin = HOC(Login)
 
-export default memo(EasyLogin);
+const EasyLogin = withFormik({ handleSubmit: apiDataSend, validationSchema: schema, initialValues: initialValues, validateOnMount:true})(Login)
+
+export default withUser(EasyLogin);
 
 
 

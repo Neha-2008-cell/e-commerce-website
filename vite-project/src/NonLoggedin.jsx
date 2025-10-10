@@ -1,10 +1,10 @@
-import React , { useContext } from "react";
-import { userData  } from "./App";
+import React from "react";
 import { Navigate } from "react-router-dom";
-export default function NonLoggedin({ children }) {
-    const {user} = useContext(userData)
+import withUser from "./withUser";
+ function NonLoggedin({ user ,children }) {
     if (user) {
      return <Navigate to="/"/>   
     }
     return  children
-}
+ }
+export default withUser(NonLoggedin)

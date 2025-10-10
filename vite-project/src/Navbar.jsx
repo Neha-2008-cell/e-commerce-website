@@ -1,9 +1,9 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { RiShoppingBagLine } from "react-icons/ri";
-import {totalCountContext} from "./App.jsx"
-export default function Navbar() {
-   const {setUser} = useContext(userData)
+import { totalCountContext } from "./App.jsx"
+import withUser from './withUser.jsx';
+function Navbar({setUser}) {
   const { totalcount } = useContext(totalCountContext)
 
   function handleLogout(){
@@ -25,3 +25,4 @@ export default function Navbar() {
         </div>
     )
 }
+export default withUser(Navbar)
