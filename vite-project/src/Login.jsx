@@ -6,13 +6,13 @@ import { RiUser3Line } from "react-icons/ri";
 import { LuShoppingCart } from "react-icons/lu";
 import { RiLockPasswordFill } from "react-icons/ri";
 import  Input  from "./Input";
-import withUser from "./withUser";
+import {withUser , withAlert} from './withProvider'
 
 //formik ke handleSubmit pe function apiDataSend de rkha hai formik me ek object hai bag jisme bhut sare info hai uske ek key hai props jisme HOC ko jo function uske sare prop hote hai or usse vah khud hi nikal leta hai. 
  
-
 function apiDataSend(values, bag) {
-     axios.post("https://dummyjson.com/auth/login", 
+
+  axios.post("https://dummyjson.com/auth/login", 
        { username: values.name, password: values.password }
      )
      .then((response) => {
@@ -20,7 +20,14 @@ function apiDataSend(values, bag) {
        localStorage.setItem("token", token)
        bag.props.setUser(user)
      })
-     .catch((error) => (console.log("Invalid",error.response?.data || error.message)))
+       .catch(() => ( 
+           bag.props.setAlert( 
+         {
+           type: "error",
+           message: "Invalid Credentials"
+         }
+       )
+       ))
      }
 
   const schema = Yup.object().shape(
@@ -102,7 +109,7 @@ export function Login({handleSubmit,handleChange,handleBlur,values,errors, touch
 
 const EasyLogin = withFormik({ handleSubmit: apiDataSend, validationSchema: schema, initialValues: initialValues, validateOnMount:true})(Login)
 
-export default withUser(EasyLogin);
+export default withAlert(withUser(EasyLogin));
 
 
 

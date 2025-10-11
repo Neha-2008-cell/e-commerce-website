@@ -1,7 +1,9 @@
-import  { useState , createContext} from 'react'
+import { useState, createContext } from 'react'
+import {Routes , Route, useLocation} from "react-router-dom"
+
+
 import './App.css'
 import Listpage from './Listpage'
-import {Routes , Route, useLocation} from "react-router-dom"
 import Detailpage from './Detailpage'
 import Navbar from './Navbar.jsx';
 import Footer from './Footer.jsx';
@@ -11,16 +13,26 @@ import ForgotPassword from './ForgotPassword.jsx'
 import Cartpage from './Cartpage.jsx'
 import Loggedin from './Loggedin.jsx'
 import NonLoggedin from './NonLoggedin.jsx'
+import {userData , alertData} from './Contexts.jsx'
+import Alert from './Alert.jsx'
+
+
 export const totalCountContext = createContext()
 export const countdata = createContext()
-export const userData = createContext()
+
+
 function App() {
+
   const getdata = localStorage.getItem("cartstorage") || "{}"
   const cartobject = JSON.parse(getdata)
+  
   const [cart, setcart] = useState(cartobject) 
-   const [ user, setUser ] = useState(null);
+  const [ user, setUser ] = useState(null);
+   const [ alert, setAlert ] = useState(null);
   
-  
+  function removeAlert() {
+    setAlert(null)
+  }
   
   function handleCart(id, count) {
     const oldCount = cart[id] || 0
@@ -36,38 +48,40 @@ function App() {
 
   const totalcount = Object.keys(cart).reduce(function (output,current) {
       return output + cart[current]
-    }, 0)
+  }, 0)
+  
   const location = useLocation()
   const path = location.pathname;
 
   
-  const cartdata = { cart,updateCart}
-  const userinfo = {user , setUser}
   return ( 
-    <userData.Provider value ={userinfo}>
+    <userData.Provider value ={{ user, setUser }}>
     <totalCountContext.Provider value={{ totalcount }}>
-    <countdata.Provider value={cartdata}>
+    <countdata.Provider value={{ cart,updateCart}}>
+    <alertData.Provider value ={{alert , setAlert}} >
+          
      <div  className='overflow-scroll h-screen  flex flex-col  bg-gray-50'>
       {path !== '/Login'&&  path !== '/signup' &&  path !== '/forgotPassword' && <Navbar  />}
-      <div className='grow'>
-        <Routes>
-          
-   <Route  index element = {<Loggedin><Listpage/></Loggedin>}/>
-      <Route path="/product/:id" element={<Detailpage handleCart={ handleCart} />} />
-      <Route path='/Cartpage' element={<Cartpage  />} />
-  
-    <Route  path='/Login'  element = {<NonLoggedin><Login setUser={setUser } /></NonLoggedin>}/>
+        <div className='grow'>
+      <Alert alert={alert} setAlert={setAlert}  removeAlert={ removeAlert}/>
+ <Routes> 
+      <Route  index element = {<Loggedin><Listpage/></Loggedin>}/>
+      <Route path="/product/:id" element={<Loggedin><Detailpage handleCart={ handleCart} /></Loggedin>} />
+      <Route path='/Cartpage' element={<Loggedin><Cartpage  /></Loggedin>} />
+      <Route  path='/Login'  element = {<NonLoggedin><Login setUser={setUser } /></NonLoggedin>}/>
+      <Route  path='/signup' element = {<NonLoggedin><Signup/></NonLoggedin>} />
+      <Route path='/forgotPassword' element={<NonLoggedin><ForgotPassword/></NonLoggedin> } />
+ </Routes>   
       
-      <Route  path='/signup' element = {<Signup/>} />
-      <Route path='/forgotPassword' element={<ForgotPassword/> } />
-    
-      </Routes>
         </div>
       {path !=='/Login' && path !== '/signup' && path !== '/forgotPassword' && <Footer />}
       </div>
+      </alertData.Provider>
       </countdata.Provider>
       </totalCountContext.Provider>
       </userData.Provider>
   )
 }
+
 export default App;
+//cd ~/Desktop/Coding/vite-project

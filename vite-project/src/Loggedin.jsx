@@ -1,6 +1,6 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
-import withUser from "./withUser";
+import {withUser} from "./withProvider";
 function Loggedin({user , children }) {
     if (!user) {
     return <Navigate to="/Login"/>   
