@@ -1,8 +1,8 @@
 import  {useEffect , useState , useContext} from "react";
-import { getdetail } from "./api";
+import { getdetail } from "../api";
 import { ImCross } from "react-icons/im";
-import Loading from "./Loading";
-import { countdata } from "./App";
+import Loading from "../Loading";
+import { countdata } from "../CreateContexts";
 
 export default function Cartrow() {
     

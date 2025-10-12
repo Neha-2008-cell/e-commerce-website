@@ -1,7 +1,7 @@
 import React , {useContext} from 'react';
 import { Link } from 'react-router-dom';
 import { RiShoppingBagLine } from "react-icons/ri";
-import { totalCountContext } from "./App.jsx"
+import { totalCountContext } from './CreateContexts.jsx';
 import { withUser } from './withProvider.jsx';
 function Navbar({setUser}) {
   const { totalcount } = useContext(totalCountContext)

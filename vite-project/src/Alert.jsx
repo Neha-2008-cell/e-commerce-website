@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
+import { withAlert } from "./withProvider";
 
-export default function Alert({ alert , removeAlert}) {
-  
+function Alert({ alert , removeAlert}) {
   useEffect(
     () => {
       if (alert) {
@@ -72,5 +72,6 @@ export default function Alert({ alert , removeAlert}) {
         </>
     )
 }
+export default withAlert(Alert) ;
 
 
