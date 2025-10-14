@@ -7,27 +7,19 @@ import { LuShoppingCart } from "react-icons/lu";
 import { RiLockPasswordFill } from "react-icons/ri";
 import  Input  from "./Input";
 import {withUser , withAlert} from './withProvider'
-
+import { login } from "./api";
 //formik ke handleSubmit pe function apiDataSend de rkha hai formik me ek object hai bag jisme bhut sare info hai uske ek key hai props jisme HOC ko jo function uske sare prop hote hai or usse vah khud hi nikal leta hai. 
  
 function apiDataSend(values, bag) {
 
-  axios.post("https://dummyjson.com/auth/login", 
-       { username: values.name, password: values.password }
-     )
+     login(values.name, values.password)
      .then((response) => {
-       const {  token , ...user } = response.data
+       const {  token , user } = response.data
        localStorage.setItem("token", token)
        bag.props.setUser(user)
+       bag.props.setAlert({message:"Login Successful", type:"success"})
      })
-       .catch(() => ( 
-           bag.props.setAlert( 
-         {
-           type: "error",
-           message: "Invalid Credentials"
-         }
-       )
-       ))
+       .catch(() => bag.props.setAlert({message:"Username and Password are wrong",type:"error"}))
      }
 
   const schema = Yup.object().shape(

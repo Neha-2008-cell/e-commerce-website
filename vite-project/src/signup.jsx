@@ -1,5 +1,3 @@
-import { memo} from "react";
-import axios from "axios";
 import { withFormik} from "formik"; 
 import * as Yup from 'yup'
 import { Link } from 'react-router-dom';
@@ -9,25 +7,16 @@ import { RiLockPasswordFill } from "react-icons/ri";
 import { FaRegUserCircle } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import Input  from "./Input";
+import { signup } from "./api";
+import { Navigate } from "react-router-dom";
+import { withAlert } from "./withProvider";
 
-
-function apiDataSend(values, { props }) {
-   axios.post("https://dummyjson.com/auth/register", {
-            email: "eve.holt@reqres.in",
-  password: "pistol"
-            // name: values.name,
-            // fullname:values.fullname,
-            // email:values.email,
-            // password:values.password ,
-            //Confirmpassword:values.Confirmpassword
-          })
-            .then((response) => {
-             console.log("response radha",response.data)
-               const { id, token } = response.data
-                localStorage.setItem("token", token)
-                props.setUser(id)
+function apiDataSend(values, bag) {
+      signup(values.name, values.password)
+            .then(() => {
+              bag.props.setAlert({ message: "Signup Successful", type: "success" });
             })
-            .catch(() => (console.log("Invalid")))
+            .catch(() => (bag.props.setAlert({message:"Error: Please fill valid details",type:"error"})))
          }
     
       const schema = Yup.object().shape(
@@ -171,10 +160,10 @@ function apiDataSend(values, { props }) {
         )
  }
      
-    const HOC = withFormik({ handleSubmit: apiDataSend, validationSchema: schema, initialValues: initialValues, validateOnMount:true})
-    const EasySign = HOC(Signup )
+     
+    const EasySign = withFormik({ handleSubmit: apiDataSend, validationSchema: schema, initialValues: initialValues, validateOnMount:true})(Signup )
     
-    export default memo(EasySign);
+    export default withAlert(EasySign);
 
     
     

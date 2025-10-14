@@ -5,7 +5,7 @@ function Alert({ alert , removeAlert}) {
   useEffect(
     () => {
       if (alert) {
-       const timeout = setTimeout(removeAlert, 2 * 1000)
+       const timeout = setTimeout(removeAlert, 3 * 1000)
         return () => clearTimeout( timeout )
       }
     }
@@ -49,11 +49,10 @@ function Alert({ alert , removeAlert}) {
     </svg>
 
     <div className="flex-1">
-      {/* <strong className="font-medium text-gray-900 dark:text-white"> Changes saved </strong> */}
 
-      <strong className="mt-0.5 text-sm text-gray-700 dark:text-gray-200">
+      <p className={"mt-0.5 text-sm font-semibold text-gray-700 " + className}>
        {message}
-      </strong>
+      </p>
 
     </div>
 
