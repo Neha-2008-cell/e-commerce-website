@@ -5,7 +5,8 @@ import { getdetail } from "./api";
 import { FaChevronRight , FaChevronLeft} from "react-icons/fa6";
 import Loading from "./Loading";
 import Notmatch from "./Notmatch";
-export default function Detailpage({handleCart}) {
+import { withCart } from "./withProvider";
+function Detailpage({handleCart}) {
     let [product, setproduct] = useState()
     let [loading, setloading] = useState(true)
     let [count,setcount] = useState(1)
@@ -65,3 +66,4 @@ export default function Detailpage({handleCart}) {
             </div>
     )
 }
+export default withCart(Detailpage);

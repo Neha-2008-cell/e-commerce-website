@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { alertData , userData  } from './CreateContexts.jsx';
+import { alertContext , userContext , cartContext } from './CreateContexts.jsx';
 
 const withProvider = (provider) => (IncomingComponent) => (props) => {
     const contextData = useContext(provider)
@@ -8,9 +8,9 @@ const withProvider = (provider) => (IncomingComponent) => (props) => {
 }
 
 export default withProvider;
-export const withUser = withProvider(userData)
-export const withAlert = withProvider(alertData)
-
+export const withUser = withProvider(userContext)
+export const withAlert = withProvider(alertContext)
+export const withCart = withProvider(cartContext)
 
 // export default function withProvider(provider){
 //  function  HOC(IncomingComponent) {

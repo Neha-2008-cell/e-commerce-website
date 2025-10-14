@@ -1,6 +1,6 @@
 import {useState} from "react";
 
-import { alertData} from '../CreateContexts.jsx'
+import { alertContext} from '../CreateContexts.jsx'
 
 export default function AlertProvider ({children}) {
    
@@ -11,7 +11,7 @@ export default function AlertProvider ({children}) {
      }
     return (
         <>
-            <alertData.Provider value={{ alert, setAlert ,removeAlert}} >{children}</alertData.Provider>
+            <alertContext.Provider value={{ alert, setAlert ,removeAlert}} >{children}</alertContext.Provider>
         </>
     )
 }

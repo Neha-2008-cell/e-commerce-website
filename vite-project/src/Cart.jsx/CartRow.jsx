@@ -2,12 +2,10 @@ import  {useEffect , useState , useContext} from "react";
 import { getdetail } from "../api";
 import { ImCross } from "react-icons/im";
 import Loading from "../Loading";
-import { countdata } from "../CreateContexts";
+import { withCart } from "../withProvider";
 
-export default function Cartrow() {
-    
-    const {cart , updateCart} = useContext(countdata)
-    
+function Cartrow( {cart , updateCart} ) {
+        
 let [products,setproducts] = useState([])
     let [loading, setloading] = useState(true)
     let [localCart , setlocalCart] = useState(cart)
@@ -40,7 +38,6 @@ let [products,setproducts] = useState([])
         const newcart = {...cart} 
         delete newcart[id]
         updateCart(newcart)
-        console.log("cart", cart , "newcart" , newcart)
     }
 
     function handleChange(event , Id) {
@@ -52,11 +49,7 @@ let [products,setproducts] = useState([])
       updateCart(localCart)  
     }
 
-
-    
-    
-    
-    return (
+   return (
         <div className="bg-white ">
           {products.map(function (props) {
                 return (
@@ -70,7 +63,7 @@ let [products,setproducts] = useState([])
                             <h1 className="text-red-500 font-bold ">{props.title}</h1>
                         </div>
                         <div className="flex justify-end mb-1 items-center font-bold gap-25">
-                        <p ><div className=" w-20 text-left">${props.price}</div></p>
+                        <div><p className=" w-20 text-left">${props.price}</p></div>
                         <input value={localCart[props.id]} type="number" onChange={function (event) { handleChange(event , props.id) }} className="border border-gray-300 rounded-md m-5  border-2 w-12 p-1 h-8 pl-2 " />
                         <p  className="w-20 text-left">${localCart[props.id] * props.price }</p>
                        </div>
@@ -85,3 +78,4 @@ let [products,setproducts] = useState([])
         </div>
     )
 }
+export default withCart(Cartrow)
