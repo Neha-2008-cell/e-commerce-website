@@ -16,12 +16,10 @@ import NonLoggedin from './NonLoggedin.jsx'
 import Alert from './Alert.jsx'
 import UserProvider from './Providers.jsx/UserProvider.jsx'
 import AlertProvider from './Providers.jsx/AlertProvider.jsx'
-import {range} from "lodash"
 import CartdataProvider from './Providers.jsx/CartProvider.jsx'
 
 
 function App() {
-//console.log("lodash kaa magic", range(3,10,5))
  
   const location = useLocation()
   const path = location.pathname;
@@ -33,9 +31,9 @@ function App() {
     <AlertProvider>
    
     
-    <div  className='overflow-scroll h-screen  flex flex-col  bg-gray-50'>
+    <div  className='flex h-screen  overflow-scroll flex-col  bg-gray-50'>
       {path !== '/Login'&&  path !== '/signup' &&  path !== '/forgotPassword' && <Navbar  />}
-        <div className='grow'>
+        <div className='flex-grow  '>
       <Alert />
  <Routes> 
       <Route  index element = {<Loggedin><Listpage/></Loggedin>}/>
